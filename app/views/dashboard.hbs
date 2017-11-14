@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>Post 'n Pick</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Link to the Bootstrap Library -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Links to an dditional CSS Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <!--viewport tag-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+ 
+<body id="pages-bg">
+	<nav class="navbar navbar-default">
+	    <div class="container">
+
+	      <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	        <div class="navbar-header">
+	          <button type="button" id="navbar-button-bg" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	        <img src="assets/img/pplogo.png" class="nav-logo" alt="logo" height="130">
+	        </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	          <ul class="nav navbar-nav">
+	          </ul>
+	        <ul class="nav navbar-nav navbar-right">
+	         <!-- <li><a href="">Post Stats</a></li>-->
+	          <li><a href="/add.html">Post Stats</a></li>
+	          <!--<li><a href="/pick">Pick Stats</a></li>-->
+	          <li><a href="/view.html">Pick Stats</a></li>
+	          <li class="logout-text"><a href="/signin"><img src="assets/img/user-icon.png" class="user-logout-icon" alt="signin pic" height="22">Logout</a></li>
+	        </ul>
+	        </div><!-- /.navbar-collapse -->
+	      </div><!-- /.container-fluid -->
+	    </div><!-- /.container -->
+	</nav>
+
+	<div class="container" id= "main-div">
+
+	    <h2>WELCOME TO YOUR DASHBOARD</h2>
+	    <h4>Pick your poison.</h4>
+			
+			<div class="row" id="dashboard-buttons">
+				<div class="col-md-3"></div>
+
+				<div class="col-md-6">
+					<div class="clearfix">
+						<div class="button1"><a href="/add.html"><img src="assets/img/button1.png" alt="signin pic" width="200"></a></div>
+						<div class="button2"><a href="/view.html"><img src="assets/img/button2.png" alt="signin pic" width="200"></a></div>
+					</div>
+				</div>
+
+				<div class="col-md-3"></div>
+	    
+	    	</div><!--row div-->
+	</div><!--container div-->
+
+  	<!-- News Div -->
+  	<div class="container" id="main-div2">
+
+   
+	    <!-- This row will handle all of the retrieved articles -->
+	    <div class="row">
+	    	<div class="col-md-6">
+			<h3 id="title">NBA News</h3>	        
+	        	<div id="more-news"></div>
+	        </div>
+
+	        <div class="col-md-6">
+	        <h3 id="title">Highlights</h3>
+				<div id="well-section"></div>
+	        </div>
+
+	    </div>
+   
+  	</div>
+
+
+	<footer class="footer">
+      <div class="container">
+        <span class="text-muted">Copyright &copy; 2017 AND3. All Rights Reserved Maybe.</span>
+      </div>
+    </footer>
+ 
+ 	<!-- Link in jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script type="text/javascript">
+
+	// SETUP VARIABLES
+	// ==========================================================
+	var authKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
+
+	var searchTerm = "";
+	var numResults = 5;
+
+	// queryURLBase is the start of our API endpoint.
+	var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
+	  authKey + "&q=";
+
+	// Counter to keep track of article numbers as they come in
+	var articleCounter = 0;
+
+	// FUNCTIONS
+	// ==========================================================
+	function runQuery(numArticles, queryURL) {
+
+	  // The data then gets stored in the variable called: "NYTData"
+	  $.ajax({
+	    url: queryURL,
+	    method: "GET"
+	  }).done(function(NYTData) {
+
+	    // Logging the URL so we have access to it for troubleshooting
+	    console.log("------------------------------------");
+	    console.log("URL: " + queryURL);
+	    console.log("------------------------------------");
+
+	    // Log the NYTData to console, where it will show up as an object
+	    console.log(NYTData);
+	    console.log("------------------------------------");
+
+	    // Loop through and provide the correct number of articles
+	    for (var i = 0; i < numArticles; i++) {
+	    	var timestamp = new Date();
+
+	      	timestamp.setDate(timestamp.getDate()-7);
+
+	      	var newTimestamp = timestamp.toISOString();
+	      	
+	      	console.log(newTimestamp);
+	      	if(newTimestamp < NYTData.response.docs[i].pub_date) {
+
+	      // Add to the Article Counter (to make sure we show the right number)
+	      articleCounter++;
+
+	      // Create the HTML well (section) and add the article content for each
+	      var wellSection = $("<div>");
+	      wellSection.addClass("well");
+	      wellSection.attr("id", "article-well-" + articleCounter);
+	      $("#well-section").append(wellSection);
+
+	      // Confirm that the specific JSON for the article isn't missing any details
+	      // If the article has a headline include the headline in the HTML
+	      if (NYTData.response.docs[i].headline !== "null") {
+	      	
+	        $("#article-well-" + articleCounter)
+	          .append(
+	            "<h3 class='articleHeadline'><span class='label label-primary'>" +
+	            articleCounter + "</span><strong> " +
+	            NYTData.response.docs[i].headline.main + "</strong></h3>"
+	          );
+	        // Log the first article's headline to console
+	        console.log(NYTData.response.docs[i].headline.main);
+	      }
+	  
+
+	      $("#article-well-" + articleCounter)
+	        .append(
+	          "<p>" + NYTData.response.docs[i].snippet + "</p>"
+	        );
+
+	      // Then display the remaining fields in the HTML (Section Name, Date, URL)
+	      $("#article-well-" + articleCounter)
+	        .append("<a href='" + NYTData.response.docs[i].web_url + "'>" +
+	          "Read it >>" + "</a>"
+	        );
+
+	      // Log the remaining fields to console as well
+	      console.log(NYTData.response.docs[i].pub_date);
+	      console.log(NYTData.response.docs[i].section_name);
+	      console.log(NYTData.response.docs[i].web_url);
+	    }
+	}
+	  });
+	}
+
+	  // Grabbing text the user typed into the search input
+	  searchTerm = "nba";
+	  var queryURL = queryURLBase + searchTerm;
+	  // Number of results the user would like displayed
+	  numResults = 10;
+	  
+	  // Then we will pass the final queryURL and the number of results to
+	  // include to the runQuery function
+	  runQuery(numResults, queryURL);
+
+  </script>
+
+  <script>
+		 // API key. 
+	    var APIKey = "924886c08f2548fc8c07fb2c9568acaf";
+
+	    // URL we need to query the database
+	    var queryURL = " https://newsapi.org/v1/articles?source=espn&sortBy=top&apiKey=" + APIKey;
+
+	    // AJAX call
+	    $.ajax({
+	      url: queryURL,
+	      method: "GET"
+	    }).done(function(response) {
+
+	      // Log the queryURL
+	      console.log(response);
+
+          // Looping through each result item
+          for (var i = 0; i < response.articles.length; i++) {
+
+          	var nbaUrls = response.articles[i].url.indexOf("nba");
+
+          	if (nbaUrls > -1) {
+
+            // Creating and storing a div tag
+            var nbaUrls = $("<div>");
+
+            var moreNewsTitle = $("<p>").html("<h4 class='articleHeadline'><span class='label label-primary'>" + "<a href ='" + response.articles[i].url +"' target='_blank'>" + "</span></h4><h4><strong> "+ response.articles[i].title + "</strong></h4></a>" + "<p>" + response.articles[i].description + "</p>");
+
+          	moreNewsTitle.addClass("moreNewsTitleStyle");
+
+          	var imgURL = response.articles[i].urlToImage;
+
+	         // Creating an element to hold the image
+	        var image = $("<img>").attr("src", imgURL);
+
+	        image.addClass("newsImage");
+
+	        // Appending the image
+	        nbaUrls.append(image);
+	          
+            nbaUrls.append(moreNewsTitle);
+
+            $("#more-news").prepend(nbaUrls);
+          }
+      		}
+
+	    });
+	</script>
+
+	<script>
+		 // API key. 
+	    var APIKey = "924886c08f2548fc8c07fb2c9568acaf";
+
+	    // URL we need to query the database
+	    var queryURL = "https://newsapi.org/v1/articles?source=fox-sports&sortBy=top&apiKey=" + APIKey;
+
+	    // AJAX call
+	    $.ajax({
+	      url: queryURL,
+	      method: "GET"
+	    }).done(function(response) {
+
+	      // Log the queryURL
+	      console.log(response);
+
+          // Looping through each result item
+          for (var i = 0; i < response.articles.length; i++) {
+
+          	var nbaUrls = response.articles[i].title.indexOf("NBA");
+
+          	if (nbaUrls > -1) {
+
+            // Creating and storing a div tag
+            var nbaUrls = $("<div>");
+
+            var moreNewsTitle = $("<p>").html("<h4 class='articleHeadline'><span class='label label-primary'>" + "<a href ='" + response.articles[i].url +"' target='_blank'>" + "</span></h4><h4><strong> "+ response.articles[i].title + "</strong></h4></a>" + "<p>" + response.articles[i].description + "</p>");
+
+          	moreNewsTitle.addClass("moreNewsTitleStyle");
+
+          	var imgURL = response.articles[i].urlToImage;
+
+	         // Creating an element to hold the image
+	        var image = $("<img>").attr("src", imgURL);
+
+	        image.addClass("newsImage");
+
+	        // Appending the image
+	        nbaUrls.append(image);
+	          
+            nbaUrls.append(moreNewsTitle);
+
+            $("#more-news").prepend(nbaUrls);
+          }
+      		}
+
+	    });
+	</script>
+
+</body>
+ 
+</html>

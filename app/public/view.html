@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+
+		<meta charset="UTF-8">
+		<title>Post 'n Pick</title>
+
+		 <!-- jQuery -->
+		 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		 <!-- Google Fonts-->
+		 <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
+		
+		 <!-- jQuery UI links -->
+		 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+		 <!-- Bootstrap CDN-->
+		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+		 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+		 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+		 <!--viewport tag-->
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+
+<div class="container">
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Search Results</h3>
+        </div>
+        <div class="modal-body" id="modal-data">
+          
+        </div>
+        <div class="modal-footer">
+        	<button type="button" id="close" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+
+	<body id="pages-bg">
+		<nav class="navbar navbar-default">
+		    <div class="container">
+
+		      <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		        <div class="navbar-header">
+		          <button type="button" id="navbar-button-bg" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		            <span class="sr-only">Toggle navigation</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		          </button>
+		        <img src="assets/img/pplogo.png" class="nav-logo" alt="logo" height="130">
+		        </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		          <ul class="nav navbar-nav">
+		          </ul>
+		        <ul class="nav navbar-nav navbar-right">
+		         <!-- <li><a href="">Post Stats</a></li>-->
+		          <li><a href="/add.html">Post Stats</a></li>
+		          <!--<li><a href="/pick">Pick Stats</a></li>-->
+		          <li><a href="/view.html">Pick Stats</a></li>
+		          <li class="logout-text"><a href="/signin"><img src="assets/img/user-icon.png" class="user-logout-icon" alt="signin pic" height="22">Logout</a></li>
+		        </ul>
+		        </div><!-- /.navbar-collapse -->
+		      </div><!-- /.container-fluid -->
+		    </div><!-- /.container -->
+		</nav>
+
+		<div class="container"  id= "main-div2">
+			<h2>Search Your Fantasy Records</h2>
+
+			<div class="row">
+				<div class="col-lg-5">
+					<div class="panel panel-default panel-transparent">
+					
+						<div class="panel-body">
+							<input type="text" id="lname-search" class="form-control" placeholder="Last Name">
+							<br>
+							<div class="text-right">
+								<button class="btn btn-primary btn-md" id="lname-search-btn"><span class="glyphicon glyphicon-search"></span> Search</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="panel panel-default panel-transparent" id="panel1">
+						<div class="panel-heading">
+							<h3 class="panel-title"><strong>Team</strong></h3>
+						</div>
+						<div class="panel-body">
+							<select id="team-search">
+								<option value="ATL">ATL - Atlanta Hawks</option>
+								<option value="BKN">BKN - Brooklyn Nets</option>
+								<option value="BOS">BOS - Boston Celtics</option>
+								<option value="CHA">CHA - Charlotte Hornets</option>
+								<option value="CHI">CHI - Chicago Bulls</option>
+								<option value="CLE">CLE - Cleveland Cavaliers</option>
+								<option value="DAL">DAL - Dallas Mavericks</option>
+								<option value="DEN">DEN - Denver Nuggets</option>
+								<option value="DET">DET - Detroit Pistons</option>
+								<option value="GSW">GSW - Golden State Warriors</option>
+								<option value="HOU">HOU - Houston Rockets</option>
+								<option value="IND">IND - Indiana Pacers</option>
+								<option value="LAC">LAC - LosAngeles Clippers</option>
+								<option value="LAL">LAL - LosAngles Lakers</option>
+								<option value="MEM">MEM - Memphis Grizzlies</option>
+								<option value="MIA">MIA - Miami Heat</option>
+								<option value="MIL">MIL - Milwaukee Bucks</option>
+								<option value="MIN">MIN - Minnesota Timberwolves</option>
+								<option value="NOP">NOP - NewOrleans Pelicans</option>
+								<option value="NYK">NYK - NewYork Knicks</option>
+								<option value="OKC">OKC - OklahomaCity Thunder</option>
+								<option value="ORL">ORL - Orlando Magic</option>
+								<option value="PHI">PHI - Philedelphia 76ers</option>
+								<option value="PHX">PHX - Phoenix Suns</option>
+								<option value="POR">POR - Portland Trailblazers</option>
+								<option value="SAC">SAC - Sacramento Kings</option>
+								<option value="SAS">SAS - SanAntonio Spurs</option>
+								<option value="TOR">TOR - Toronto Raptors</option>
+								<option value="UTA">UTA - Utah Jazz</option>
+								<option value="WAS">WAS - Washington Wizards</option>				
+							</select>
+							<br>
+							<div class="text-right">
+								<button class="btn btn-primary btn-md" id="team-search-btn"><span class="glyphicon glyphicon-search"></span> Search</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="panel panel-default panel-transparent">
+						<div class="panel-heading">
+							<h3 class="panel-title"><strong>Position</strong></h3>
+						</div>
+						<div class="panel-body">
+							<select id="position-search">
+								<option value="PG">PG - Point Guard</option>
+								<option value="SG">SG - Shooting Guard</option>
+								<option value="SF">SF - Small Forward</option>
+								<option value="PG">PF - Power Forward</option>
+								<option value="C">C - Center</option>
+							</select>
+							<br>
+							<div class="text-right">
+								<button class="btn btn-primary btn-md" id="position-search-btn"><span class="glyphicon glyphicon-search"></span> Search</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="panel panel-default panel-transparent">
+						
+						<div class="panel-body">
+							<input type="radio" name="greater" id="greaterthan" value="Greater" checked="checked" value="1"> Greater
+  							<input type="radio" name="greater" id="lessthan" value="Less"> Less
+							<input type="text" id="fanpts-search" class="form-control" placeholder="Fan Points">
+							<br>
+							<div class="text-right">
+								<button class="btn btn-primary btn-md" id="fanpts-search-btn"><span class="glyphicon glyphicon-search"></span> Search</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-1">
+					
+				</div>
+
+				<div class="col-lg-6">
+					<div class="panel panel-default panel-transparent">
+						<div class="panel-heading">
+							<h3 class="panel-title"><strong>Last Name with Opponent</strong></h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-9">
+									<input type="text" id="lnameOpp-search" class="form-control" placeholder="Last Name">
+									<label for="">Opponent: </label>
+									<select id="lnameOpp2-search">
+										<option value="ATL">ATL - Atlanta Hawks</option>
+										<option value="BKN">BKN - Brooklyn Nets</option>
+										<option value="BOS">BOS - Boston Celtics</option>
+										<option value="CHA">CHA - Charlotte Hornets</option>
+										<option value="CHI">CHI - Chicago Bulls</option>
+										<option value="CLE">CLE - Cleveland Cavaliers</option>
+										<option value="DAL">DAL - Dallas Mavericks</option>
+										<option value="DEN">DEN - Denver Nuggets</option>
+										<option value="DET">DET - Detroit Pistons</option>
+										<option value="GSW">GSW - Golden State Warriors</option>
+										<option value="HOU">HOU - Houston Rockets</option>
+										<option value="IND">IND - Indiana Pacers</option>
+										<option value="LAC">LAC - LosAngeles Clippers</option>
+										<option value="LAL">LAL - LosAngles Lakers</option>
+										<option value="MEM">MEM - Memphis Grizzlies</option>
+										<option value="MIA">MIA - Miami Heat</option>
+										<option value="MIL">MIL - Milwaukee Bucks</option>
+										<option value="MIN">MIN - Minnesota Timberwolves</option>
+										<option value="NOP">NOP - NewOrleans Pelicans</option>
+										<option value="NYK">NYK - NewYork Knicks</option>
+										<option value="OKC">OKC - OklahomaCity Thunder</option>
+										<option value="ORL">ORL - Orlando Magic</option>
+										<option value="PHI">PHI - Philedelphia 76ers</option>
+										<option value="PHX">PHX - Phoenix Suns</option>
+										<option value="POR">POR - Portland Trailblazers</option>
+										<option value="SAC">SAC - Sacramento Kings</option>
+										<option value="SAS">SAS - SanAntonio Spurs</option>
+										<option value="TOR">TOR - Toronto Raptors</option>
+										<option value="UTA">UTA - Utah Jazz</option>
+										<option value="WAS">WAS - Washington Wizards</option>				
+									</select>
+								</div>
+								<div class="col-lg-3">
+									<br>
+									<br>
+									<br>
+									<br>
+									<div class="text-right">
+										<button class="btn btn-primary btn-md" id="lnameOpp-search-btn"><span class="glyphicon glyphicon-search"></span> Search</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="panel panel-default panel-transparent">
+						<div class="panel-heading">
+							<h3 class="panel-title"><strong>Team with Opponent</strong></h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-9">
+									<label for="">Team:</label>
+									<select id="teamOpp-search">
+										<option value="ATL">ATL - Atlanta Hawks</option>
+										<option value="BKN">BKN - Brooklyn Nets</option>
+										<option value="BOS">BOS - Boston Celtics</option>
+										<option value="CHA">CHA - Charlotte Hornets</option>
+										<option value="CHI">CHI - Chicago Bulls</option>
+										<option value="CLE">CLE - Cleveland Cavaliers</option>
+										<option value="DAL">DAL - Dallas Mavericks</option>
+										<option value="DEN">DEN - Denver Nuggets</option>
+										<option value="DET">DET - Detroit Pistons</option>
+										<option value="GSW">GSW - Golden State Warriors</option>
+										<option value="HOU">HOU - Houston Rockets</option>
+										<option value="IND">IND - Indiana Pacers</option>
+										<option value="LAC">LAC - LosAngeles Clippers</option>
+										<option value="LAL">LAL - LosAngles Lakers</option>
+										<option value="MEM">MEM - Memphis Grizzlies</option>
+										<option value="MIA">MIA - Miami Heat</option>
+										<option value="MIL">MIL - Milwaukee Bucks</option>
+										<option value="MIN">MIN - Minnesota Timberwolves</option>
+										<option value="NOP">NOP - NewOrleans Pelicans</option>
+										<option value="NYK">NYK - NewYork Knicks</option>
+										<option value="OKC">OKC - OklahomaCity Thunder</option>
+										<option value="ORL">ORL - Orlando Magic</option>
+										<option value="PHI">PHI - Philedelphia 76ers</option>
+										<option value="PHX">PHX - Phoenix Suns</option>
+										<option value="POR">POR - Portland Trailblazers</option>
+										<option value="SAC">SAC - Sacramento Kings</option>
+										<option value="SAS">SAS - SanAntonio Spurs</option>
+										<option value="TOR">TOR - Toronto Raptors</option>
+										<option value="UTA">UTA - Utah Jazz</option>
+										<option value="WAS">WAS - Washington Wizards</option>				
+									</select>
+									<br>
+									<label for="">Opponent:</label>
+									<select id="teamOpp2-search">
+										<option value="ATL">ATL - Atlanta Hawks</option>
+										<option value="BKN">BKN - Brooklyn Nets</option>
+										<option value="BOS">BOS - Boston Celtics</option>
+										<option value="CHA">CHA - Charlotte Hornets</option>
+										<option value="CHI">CHI - Chicago Bulls</option>
+										<option value="CLE">CLE - Cleveland Cavaliers</option>
+										<option value="DAL">DAL - Dallas Mavericks</option>
+										<option value="DEN">DEN - Denver Nuggets</option>
+										<option value="DET">DET - Detroit Pistons</option>
+										<option value="GSW">GSW - Golden State Warriors</option>
+										<option value="HOU">HOU - Houston Rockets</option>
+										<option value="IND">IND - Indiana Pacers</option>
+										<option value="LAC">LAC - LosAngeles Clippers</option>
+										<option value="LAL">LAL - LosAngles Lakers</option>
+										<option value="MEM">MEM - Memphis Grizzlies</option>
+										<option value="MIA">MIA - Miami Heat</option>
+										<option value="MIL">MIL - Milwaukee Bucks</option>
+										<option value="MIN">MIN - Minnesota Timberwolves</option>
+										<option value="NOP">NOP - NewOrleans Pelicans</option>
+										<option value="NYK">NYK - NewYork Knicks</option>
+										<option value="OKC">OKC - OklahomaCity Thunder</option>
+										<option value="ORL">ORL - Orlando Magic</option>
+										<option value="PHI">PHI - Philedelphia 76ers</option>
+										<option value="PHX">PHX - Phoenix Suns</option>
+										<option value="POR">POR - Portland Trailblazers</option>
+										<option value="SAC">SAC - Sacramento Kings</option>
+										<option value="SAS">SAS - SanAntonio Spurs</option>
+										<option value="TOR">TOR - Toronto Raptors</option>
+										<option value="UTA">UTA - Utah Jazz</option>
+										<option value="WAS">WAS - Washington Wizards</option>				
+									</select>
+								</div>
+								<div class="col-lg-3">
+									<br>
+									<br>
+									<br>
+									<br>
+									<div class="text-right">
+										<button class="btn btn-primary btn-md" id="teamOpp-search-btn"><span class="glyphicon glyphicon-search"></span> Search</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="panel panel-default panel-transparent">
+						<div class="panel-heading">
+							<h3 class="panel-title"><strong>Position with Opponent</strong></h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-9">
+									<label for="">Position: </label>
+									<select id="positionOpp-search">
+										<option value="PG">PG - Point Guard</option>
+										<option value="SG">SG - Shooting Guard</option>
+										<option value="SF">SF - Small Forward</option>
+										<option value="PG">PF - Power Forward</option>
+										<option value="C">C - Center</option>
+									</select>
+									<br>
+									<label for="">Opponent: </label>
+									<select id="positionOpp2-search">
+										<option value="ATL">ATL - Atlanta Hawks</option>
+										<option value="BKN">BKN - Brooklyn Nets</option>
+										<option value="BOS">BOS - Boston Celtics</option>
+										<option value="CHA">CHA - Charlotte Hornets</option>
+										<option value="CHI">CHI - Chicago Bulls</option>
+										<option value="CLE">CLE - Cleveland Cavaliers</option>
+										<option value="DAL">DAL - Dallas Mavericks</option>
+										<option value="DEN">DEN - Denver Nuggets</option>
+										<option value="DET">DET - Detroit Pistons</option>
+										<option value="GSW">GSW - Golden State Warriors</option>
+										<option value="HOU">HOU - Houston Rockets</option>
+										<option value="IND">IND - Indiana Pacers</option>
+										<option value="LAC">LAC - LosAngeles Clippers</option>
+										<option value="LAL">LAL - LosAngles Lakers</option>
+										<option value="MEM">MEM - Memphis Grizzlies</option>
+										<option value="MIA">MIA - Miami Heat</option>
+										<option value="MIL">MIL - Milwaukee Bucks</option>
+										<option value="MIN">MIN - Minnesota Timberwolves</option>
+										<option value="NOP">NOP - NewOrleans Pelicans</option>
+										<option value="NYK">NYK - NewYork Knicks</option>
+										<option value="OKC">OKC - OklahomaCity Thunder</option>
+										<option value="ORL">ORL - Orlando Magic</option>
+										<option value="PHI">PHI - Philedelphia 76ers</option>
+										<option value="PHX">PHX - Phoenix Suns</option>
+										<option value="POR">POR - Portland Trailblazers</option>
+										<option value="SAC">SAC - Sacramento Kings</option>
+										<option value="SAS">SAS - SanAntonio Spurs</option>
+										<option value="TOR">TOR - Toronto Raptors</option>
+										<option value="UTA">UTA - Utah Jazz</option>
+										<option value="WAS">WAS - Washington Wizards</option>				
+									</select>
+								</div>
+								<div class="col-lg-3">
+									<br>
+									<br>
+									<br>
+									<br>
+									<div class="text-right">
+										<button class="btn btn-primary btn-md" id="positionOpp-search-btn"><span class="glyphicon glyphicon-search"></span> Search</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="panel panel-default panel-transparent">
+						
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-9">
+									<input type="radio" name="greater2" id="greaterthan2" value="Greater" checked="checked" value="1"> Greater
+  							        <input type="radio" name="greater2" id="lessthan2" value="Less"> Less
+									<input type="text" id="fanptsOpp-search" class="form-control" placeholder="Fan Points with Opponent">
+									<label for="">Opponent:</label>
+									<select id="fanptsOpp2-search">
+										<option value="ATL">ATL - Atlanta Hawks</option>
+										<option value="BKN">BKN - Brooklyn Nets</option>
+										<option value="BOS">BOS - Boston Celtics</option>
+										<option value="CHA">CHA - Charlotte Hornets</option>
+										<option value="CHI">CHI - Chicago Bulls</option>
+										<option value="CLE">CLE - Cleveland Cavaliers</option>
+										<option value="DAL">DAL - Dallas Mavericks</option>
+										<option value="DEN">DEN - Denver Nuggets</option>
+										<option value="DET">DET - Detroit Pistons</option>
+										<option value="GSW">GSW - Golden State Warriors</option>
+										<option value="HOU">HOU - Houston Rockets</option>
+										<option value="IND">IND - Indiana Pacers</option>
+										<option value="LAC">LAC - LosAngeles Clippers</option>
+										<option value="LAL">LAL - LosAngles Lakers</option>
+										<option value="MEM">MEM - Memphis Grizzlies</option>
+										<option value="MIA">MIA - Miami Heat</option>
+										<option value="MIL">MIL - Milwaukee Bucks</option>
+										<option value="MIN">MIN - Minnesota Timberwolves</option>
+										<option value="NOP">NOP - NewOrleans Pelicans</option>
+										<option value="NYK">NYK - NewYork Knicks</option>
+										<option value="OKC">OKC - OklahomaCity Thunder</option>
+										<option value="ORL">ORL - Orlando Magic</option>
+										<option value="PHI">PHI - Philedelphia 76ers</option>
+										<option value="PHX">PHX - Phoenix Suns</option>
+										<option value="POR">POR - Portland Trailblazers</option>
+										<option value="SAC">SAC - Sacramento Kings</option>
+										<option value="SAS">SAS - SanAntonio Spurs</option>
+										<option value="TOR">TOR - Toronto Raptors</option>
+										<option value="UTA">UTA - Utah Jazz</option>
+										<option value="WAS">WAS - Washington Wizards</option>				
+									</select>
+								</div>
+								<div class="col-lg-3">
+									<br>
+									<br>
+									<br>
+									<br>
+									<div class="text-right">
+										<button class="btn btn-primary btn-md" id="fanptsOpp-search-btn"><span class="glyphicon glyphicon-search"></span> Search</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="footer">
+      	<div class="container">
+        	<span class="text-muted">Copyright &copy; 2017 AND3. All Rights Reserved Maybe.</span>
+      	</div>
+    </footer>
+
+	<!-- Custom Script -->
+	<script src="assets/js/view.js" type="text/javascript"></script>
+	</body>
+</html>

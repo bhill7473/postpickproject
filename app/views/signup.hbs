@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>Post 'n Pick</title>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Link to the Bootstrap Library -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Links to an dditional CSS Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <!--viewport tag-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+ 
+<body id="signin-bg">
+
+    <nav class="navbar navbar-default" id="navbar-default-signin">
+        <div class="container">
+
+          <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+            <a class="navbar-brand" href=""><img src="assets/img/pplogo2.png" class="nav-logo-signin" alt="logo" height="130"></a>
+            </div>          
+          </div><!-- /.container-fluid -->
+        </div><!-- /.container -->
+    </nav>
+
+    <div class="container">
+        <div class="row" id="signinBoard">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <img src="assets/img/signin.png" alt="signin pic" height="300">
+                    </div>
+                    
+                    <div class="col-md-6" id="loginArea">
+                        <div class="clearfix"><div class="login-header">Create An Account</div>
+                        <div class="login-switch">or <a href="/signin" class="login-switch-link">sign in</a></div></div>
+
+                        <div class="form-group">
+                            <form id="signup" name="signup" method="post" action="/signup">
+                                <input class="form-control" name="email" type="email" placeholder="Email"/>
+                                <input name="firstname" class="form-control" type="text" placeholder="First Name"/>
+                                <input name="lastname" class="form-control" type="text" placeholder="Last Name"/>
+                                <input name="password" class="form-control" type="password" placeholder="Password"/>
+                                <input class="btn btn-primary" type="submit" value="Sign Up" />
+                            </form>
+                        </div>
+                    </div>
+
+                </div><!--login row-->
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+    </div><!--container div-->
+
+    <footer class="footer" id="sign-footer">
+      <div class="container">
+        <span class="text-muted">Copyright &copy; 2017 AND3. All Rights Reserved Maybe.</span>
+      </div>
+    </footer>
+
+    
+    <!-- Link in jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+</body>
+ 
+</html>

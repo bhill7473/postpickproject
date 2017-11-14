@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>Post 'n Pick</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Link to the Bootstrap Library -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Links to an dditional CSS Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <!--viewport tag-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+ 
+<body id="signin-bg">
+
+	<nav class="navbar navbar-default" id="navbar-default-signin">
+	    <div class="container">
+
+	      <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	        <div class="navbar-header">
+	        <a class="navbar-brand" href=""><img src="assets/img/pplogo2.png" class="nav-logo-signin" alt="logo" height="130"></a>
+	        </div>	        
+	      </div><!-- /.container-fluid -->
+	    </div><!-- /.container -->
+	</nav>
+
+	<div class="container">
+		<div class="row" id="signinBoard">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="row">
+
+					<div class="col-md-6">
+						<img src="assets/img/signin.png" alt="signin pic" height="300">
+					</div>
+					
+					<div class="col-md-6" id="loginArea">
+						<div class="clearfix"><div class="login-header">Sign in</div>
+						<div class="login-switch">or <a href="/signup" class="login-switch-link">create an account</a></div></div>
+						
+						<!--<% if (signinMessage) { %>
+        					<div class="alert alert-danger"><%= message %></div>
+    					<% } %>-->
+
+    					<!--<input type="hidden" value="<%= JSON.stringify(signinMessage) %>">-->
+
+						<div class="form-group">
+				            <form id="signin" name="signin" method="post" action="signin">
+						        <input class="form-control" id="Email" name="email" type="text" placeholder="Email" />
+						        <input class="form-control" id="password" name="password" type="password" placeholder="Password"/>
+						        <input class="btn btn-primary" id="submitBtn" type="submit" value="Sign In" />
+				    		</form>
+				    	</div>
+					</div>
+
+				</div><!--login row-->
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+		
+	</div><!--container div-->
+
+	<footer class="footer" id="sign-footer">
+      <div class="container">
+        <span class="text-muted">Copyright &copy; 2017 AND3. All Rights Reserved Maybe.</span>
+      </div>
+    </footer>
+
+	<!-- Link in jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script>
+
+		$("#submitBtn").on("click", function(event) {
+sessionStorage.setItem('Email', $("#Email").val());
+			//event.preventDefault();
+		  	/*$.ajax({
+		  		url: "signin"
+		  		method: "Post"
+		  		data: {
+		  			email: $("#Email").val(),
+		  			password: $("#password").val()
+		  		}
+		  	});*/
+  		});
+
+		 // This is our API key. Add your own API key between the ""
+	    var APIKey = "924886c08f2548fc8c07fb2c9568acaf";
+
+	    // Here we are building the URL we need to query the database
+	    var queryURL = " https://newsapi.org/v1/articles?source=espn&sortBy=top&apiKey=" + APIKey;
+
+	    // We then created an AJAX call
+	    $.ajax({
+	      url: queryURL,
+	      method: "GET"
+	    }).done(function(response) {
+
+	      // Create CODE HERE to Log the queryURL
+	      console.log(response);
+
+          // Looping through each result item
+          for (var i = 0; i < response.articles.length; i++) {
+
+          	var nbaUrls = response.articles.indexOf("nba");
+
+            // Creating and storing a div tag
+            var nbaUrls = $("<div>");
+
+            var p = $("<p>").text(response.articles[i].title);
+          
+            nbaUrls.append(p);
+
+            $("#well-section").prepend(nbaUrls);
+          }
+      
+
+	    });
+	</script>
+</body>
+ 
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>Post 'n Pick</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Link to the Bootstrap Library -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Links to an dditional CSS Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <!--viewport tag-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+ 
+<body>
+	<nav class="navbar navbar-default">
+	    <div class="container">
+
+	      <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	        <a class="navbar-brand" href="">POST 'N PICK</a>
+	        </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	          <ul class="nav navbar-nav">
+	          </ul>
+	        <ul class="nav navbar-nav navbar-right">
+	          <li><a href="dashboard.handlebars">Post Stats</a></li>
+	          <li><a href="">Pick Stats</a></li>
+	        </ul>
+	        </div><!-- /.navbar-collapse -->
+	      </div><!-- /.container-fluid -->
+	    </div><!-- /.container -->
+	</nav>
+
+	<div class="container">
+
+	    <h2>Pick Your Stats</h2>
+	    <h5>Choose which field you would like to search by.</h5>
+
+	    <div class="form-group">
+			<form id="playerPost" name="playerPost" method="post" action="playerPost">
+				<input class="form-control" name="playerName" type="text" placeholder="Player Name" />
+				<input class="form-control" name="playerTeam" type="text" placeholder="Player Team"/>
+				<input class="form-control" name="playerPosition" type="text" placeholder="Player Position"/>
+				<input class="form-control" name="playerFanPoints" type="text" placeholder="Player Fan Points"/>
+				<input class="btn btn-primary" type="submit" value="Search" />
+			</form>
+		</div>
+		
+		<h4>Search Results</h4>
+		<div class="search-results">
+		</div>
+
+	</div><!--container div-->
+ 
+ 	<!-- Link in jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+</body>
+ 
+</html>
